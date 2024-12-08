@@ -1,35 +1,40 @@
 ﻿using kursOOP.Data.Models;
-using kursOOP.Services;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using kursOOP.Utils;
+using kursOOP.Services;
 
 namespace kursOOP.ViewModels
 {
     public class PaymentViewModel : BaseViewModel
     {
+        private readonly PaymentService _paymentService;
         public ObservableCollection<Payment> Payments { get; set; }
-        public ICommand AddPaymentCommand { get; }
-        public ICommand DeletePaymentCommand { get; }
+        public ICommand RecordPaymentCommand { get; }
 
-        public PaymentViewModel()
+        public PaymentViewModel(PaymentService paymentService)
         {
-            Payments = new ObservableCollection<Payment>(PaymentService.GetAll());
-            AddPaymentCommand = new RelayCommand(AddPayment);
-            DeletePaymentCommand = new RelayCommand(DeletePayment, CanDelete);
+            _paymentService = paymentService;
+            Payments = new ObservableCollection<Payment>();
+
+            RecordPaymentCommand = new RelayCommand(RecordPayment);
+
+            LoadPaymentsAsync();
         }
 
-        private void AddPayment()
+        private async Task LoadPaymentsAsync()
         {
-            // Логика добавления платежа
+            var payments = await _paymentService.GetAllPaymentsAsync();
+            foreach (var payment in payments)
+            {
+                Payments.Add(payment);
+            }
         }
 
-        private void DeletePayment()
+        private void RecordPayment()
         {
-            // Логика удаления платежа
+            // Логика для записи платежа
         }
-
-        private bool CanDelete() => SelectedPayment != null;
-
-        public Payment SelectedPayment { get; set; }
     }
 }

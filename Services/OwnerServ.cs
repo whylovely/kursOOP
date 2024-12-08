@@ -19,6 +19,12 @@ namespace kursOOP.Services
             return await _ownerRepository.GetAllAsync();
         }
 
+        // Добавляем метод GetAll, чтобы избавиться от ошибки в ViewModel
+        public async Task<IEnumerable<Owner>> GetAll()
+        {
+            return await GetAllOwnersAsync();
+        }
+
         public async Task AddOwnerAsync(Owner owner)
         {
             await _ownerRepository.AddAsync(owner);

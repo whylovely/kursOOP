@@ -1,17 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace kursOOP
 {
-    /// <summary>
-    /// Логика взаимодействия для App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            InitializeComponent();
+        }
+
+        // Перегрузка метода OnStartup для дополнительной логики старта приложения
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            // Пример кастомной логики для инициализации
+            // Здесь можно создать и запустить главный ViewModel или выполнить другие действия
+        }
     }
 }

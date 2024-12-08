@@ -8,6 +8,7 @@ namespace kursOOP.Data.Repository
     public interface IRepository<T> where T : class
     {
         Task<T> GetByIdAsync(int id); // Получить объект по ID
+        IEnumerable<T> GetAll();
         Task<IEnumerable<T>> GetAllAsync(); // Получить все объекты
         Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate); // Найти объекты по условию
         Task AddAsync(T entity); // Добавить объект

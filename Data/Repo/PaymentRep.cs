@@ -15,6 +15,11 @@ namespace kursOOP.Data.Repository
             _context = context;
         }
 
+        public IEnumerable<Payment> GetAll()
+        {
+            return _context.Payments.ToList(); // Возвращаем все платежи из базы данных
+        }
+
         public async Task<Payment> GetByIdAsync(int id)
         {
             return await _context.Payments

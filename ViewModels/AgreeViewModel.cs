@@ -1,8 +1,12 @@
-﻿using kursOOP.Data.Models;
+﻿using kursOOP.Data;
+using kursOOP.Data.Models;
+using kursOOP.Data.Repository;
 using kursOOP.Services;
-using RentalSystem.Services;
+using kursOOP.Utils;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Microsoft.EntityFrameworkCore;
+using RentalSystem.Services;
 
 namespace kursOOP.ViewModels
 {
@@ -13,9 +17,22 @@ namespace kursOOP.ViewModels
         public ICommand EditAgreementCommand { get; }
         public ICommand TerminateAgreementCommand { get; }
 
+        private readonly AgreementService _agreementService;
+
         public AgreementViewModel()
         {
-            Agreements = new ObservableCollection<RentalAgreement>(AgreementService.GetAll());
+            // Создание экземпляра DbContextOptions для DatabaseContext
+            var options = new DbContextOptionsBuilder<DatabaseContext>()
+                .UseSqlServer("Server=postgres;Database=property;Trusted_Connection=True;MultipleActiveResultSets=true")  // Укажите строку подключения
+                .Options;
+
+            // Создание экземпляра AgreementService с параметром DatabaseContext
+            _agreementService = new AgreementService(new RentalAgreementRepository(new DatabaseContext(options)));
+
+            // Загрузка всех договоров
+            Agreements = new ObservableCollection<RentalAgreement>(_agreementService.GetAll());
+
+            // Инициализация команд
             CreateAgreementCommand = new RelayCommand(CreateAgreement);
             EditAgreementCommand = new RelayCommand(EditAgreement, CanEditOrTerminate);
             TerminateAgreementCommand = new RelayCommand(TerminateAgreement, CanEditOrTerminate);

@@ -15,6 +15,11 @@ namespace kursOOP.Data.Repository
             _context = context;
         }
 
+        public IEnumerable<Owner> GetAll()
+        {
+            return _context.Owners.ToList(); // Возвращаем список всех владельцев из базы данных
+        }
+
         public async Task<Owner> GetByIdAsync(int id)
         {
             return await _context.Owners

@@ -14,6 +14,10 @@ namespace kursOOP.Data.Repository
         {
             _context = context;
         }
+        public IEnumerable<RentalAgreement> GetAll()
+        {
+            return _context.RentalAgreements.ToList();
+        }
 
         public async Task<RentalAgreement> GetByIdAsync(int id)
         {

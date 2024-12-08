@@ -1,6 +1,7 @@
 ﻿using kursOOP.Data.Models;
 using kursOOP.Data.Repository;
 using System;
+using kursOOP.Utils;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,10 +10,22 @@ namespace RentalSystem.Services
     public class AgreementService
     {
         private readonly IRepository<RentalAgreement> _agreementRepository;
+        public IEnumerable<RentalAgreement> RentalAgreements { get; private set; }
 
         public AgreementService(IRepository<RentalAgreement> agreementRepository)
         {
             _agreementRepository = agreementRepository;
+        }
+
+        public IEnumerable<RentalAgreement> GetAll()
+        {
+            return _agreementRepository.GetAll();
+        }
+
+        public void LoadAgreements()
+        {
+            // Вызов метода GetAll() через экземпляр AgreementService
+            RentalAgreements = _agreementRepository.GetAll();
         }
 
         public async Task<RentalAgreement> CreateAgreementAsync(Property property, Tenant tenant, DateTime startDate, decimal monthlyRent)

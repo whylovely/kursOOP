@@ -1,9 +1,10 @@
 ﻿using kursOOP.Data.Models;
 using kursOOP.Data.Repository;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace RentalSystem.Services
+namespace kursOOP.Services
 {
     public class PaymentService
     {
@@ -30,6 +31,12 @@ namespace RentalSystem.Services
             };
 
             await _paymentRepository.AddAsync(payment);
+        }
+
+        // Добавляем метод GetAll для получения всех платежей
+        public async Task<IEnumerable<Payment>> GetAllPaymentsAsync()
+        {
+            return await _paymentRepository.GetAllAsync();
         }
     }
 }

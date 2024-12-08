@@ -15,6 +15,11 @@ namespace kursOOP.Data.Repository
             _context = context;
         }
 
+        public IEnumerable<Property> GetAll()
+        {
+            return _context.Properties.ToList();
+        }
+
         public async Task<Property> GetByIdAsync(int id)
         {
             return await _context.Properties

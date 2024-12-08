@@ -1,9 +1,8 @@
 ﻿<Application x:Class="kursOOP.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:kursOOP"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <!-- Здесь можно определить ресурсы для всего приложения, например, стили или данные -->
     </Application.Resources>
 </Application>
