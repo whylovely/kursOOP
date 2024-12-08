@@ -144,6 +144,12 @@
     <Compile Include="Services\PaymentServ.cs" />
     <Compile Include="Services\PropertyServ.cs" />
     <Compile Include="Services\TenantServ.cs" />
+    <Compile Include="ViewModels\AgreeViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModdel.cs" />
+    <Compile Include="ViewModels\OwnerViewModel.cs" />
+    <Compile Include="ViewModels\PaymentViewModel.cs" />
+    <Compile Include="ViewModels\PropertyViewModel.cs" />
+    <Compile Include="ViewModels\TenantVIewModel.cs" />
     <Compile Include="Views\AgreementView.xaml.cs">
       <DependentUpon>AgreementView.xaml</DependentUpon>
     </Compile>
